@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+ 
+ li{
+  margin: 0 24px;
+    list-style: none;
+    font-weight: bold;
+}  
