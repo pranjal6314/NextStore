@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      listStyleType: {
+        none: "none",
+        disc: "disc",
+        decimal: "decimal",
+        square: "square",
+        roman: "upper-roman",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
