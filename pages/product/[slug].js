@@ -1,7 +1,23 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useState } from "react";
 
 const Slug = () => {
+  const [pin, setPin] = useState();
+  const [service, setService] = useState();
+  const checkServiceAbility = async () => {
+    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pinJson = await pins.json();
+    if (pinJson.includes(parseInt(pin))) {
+      setService(true);
+    } else {
+      setService(false);
+    }
+  };
+  const onchangePin = (e) => {
+    setPin(e.target.value);
+  };
+
   const router = useRouter();
   const { slug } = router.query;
   return (
@@ -179,6 +195,30 @@ const Slug = () => {
                   </svg>
                 </button>
               </div>
+              <div className="pin mt-6 flex space-x-2 text-sm">
+                <input
+                  placeholder="Enter Pincode"
+                  type="text "
+                  onChange={onchangePin}
+                  className="px-2 border-4 border-black rounded-md "
+                />
+                <button
+                  onClick={checkServiceAbility}
+                  className="bg-sky-500 border-0 py-2 px-6 text-white  hover:bg-sky-600 rounded focus:outline-none"
+                >
+                  Check
+                </button>
+              </div>
+              {!service && service != null && (
+                <div className="text-red-700 mt-3 text-sm">
+                  Sorry! We don't deliver to this pincode
+                </div>
+              )}
+              {service && service != null && (
+                <div className="text-green-700 mt-3 text-sm">
+                  Yay! We deliver to this pincode
+                </div>
+              )}
             </div>
           </div>
         </div>
