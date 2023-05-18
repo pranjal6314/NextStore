@@ -17,7 +17,6 @@ export default function Home() {
         />
         <link rel="icon" href="/logo2.png" />
       </Head>
-      <Navbar />
       <div className="w-screen h-screen flex justify-center items-center">
         <img src="/home.jpg" alt="home" className="max-w-full max-h-full" />
       </div>
@@ -39,9 +38,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -63,9 +62,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -89,9 +88,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -114,9 +113,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -138,9 +137,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -162,9 +161,9 @@ export default function Home() {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
                   >
@@ -181,13 +180,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <button className="flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">
-            Button
-          </button>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }
