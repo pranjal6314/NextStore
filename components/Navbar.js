@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
-const Navbar = () => {
+const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   const ref = useRef(null);
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
@@ -85,65 +85,60 @@ const Navbar = () => {
             <AiFillCloseCircle />
           </span>
           <ul class="list-disc  list-inside font-semibold">
-            <li>
-              <div className="item flex my-3">
-                <div className="w-2/3 font-semibold">TShirt-1</div>
-                <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
-                  <AiFillMinusCircle className="cursor-pointer text-sky-500" />
-                  <span className="mx-2">1</span>
-                  <AiFillPlusCircle className="cursor-pointer text-sky-500" />
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div className="item flex my-3">
-                <div className="w-2/3 font-semibold">TShirt-1</div>
-                <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
-                  <AiFillMinusCircle className="cursor-pointer text-sky-500" />
-                  <span className="mx-2">1</span>
-                  <AiFillPlusCircle className="cursor-pointer text-sky-500" />
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div className="item flex my-3">
-                <div className="w-2/3 font-semibold">TShirt-1</div>
-                <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
-                  <AiFillMinusCircle className="cursor-pointer text-sky-500" />
-                  <span className="mx-2">1</span>
-                  <AiFillPlusCircle className="cursor-pointer text-sky-500" />
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div className="item flex my-3">
-                <div className="w-2/3 font-semibold">TShirt-1</div>
-                <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
-                  <AiFillMinusCircle className="cursor-pointer text-sky-500" />
-                  <span className="mx-2">1</span>
-                  <AiFillPlusCircle className="cursor-pointer text-sky-500" />
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div className="item flex my-3">
-                <div className="w-2/3 font-semibold">TShirt-1</div>
-                <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
-                  <AiFillMinusCircle className="cursor-pointer text-sky-500" />
-                  <span className="mx-2">1</span>
-                  <AiFillPlusCircle className="cursor-pointer text-sky-500" />
-                </div>
-              </div>
-            </li>
+            {Object.keys(cart).length == 0 && (
+              <div className="my-2 font-semibold">No item in Cart</div>
+            )}
+            {Object.keys(cart).map((item) => {
+              return (
+                <li key={item}>
+                  <div className="item flex my-3">
+                    <div className="w-2/3 font-semibold">{cart[item].name}</div>
+                    <div className="w-1/3 font-semibold items-center justify-center flex text-lg">
+                      <AiFillMinusCircle
+                        onClick={() => {
+                          removeFromCart(
+                            item,
+                            1,
+                            cart[item].price,
+                            cart[item].name,
+                            cart[item].size,
+                            cart[item].variant
+                          );
+                        }}
+                        className="cursor-pointer text-sky-500"
+                      />
+                      <span className="mx-2">{cart[item].qty}</span>
+                      <AiFillPlusCircle
+                        onClick={() => {
+                          addToCart(
+                            item,
+                            1,
+                            cart[item].price,
+                            cart[item].name,
+                            cart[item].size,
+                            cart[item].variant
+                          );
+                        }}
+                        className="cursor-pointer text-sky-500"
+                      />
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
-          <button className="flex mx-auto mt-16 text-white bg-sky-500 border-0 py-2 px-8 focus:outline-none hover:bg-sky-300 rounded hover:text-sky-800 hover:font-bold text-lg">
-            <BsFillBagCheckFill className="m-1 hover:text-sky-800" />
-            CheckOut
-          </button>
+          <div className="flex">
+            <button className="flex mr-2  mt-8 text-white bg-sky-500 border-0 py-2 px-2 focus:outline-none hover:bg-sky-300 rounded hover:text-sky-800 hover:font-bold text-lg">
+              <BsFillBagCheckFill className="m-1 hover:text-sky-800" />
+              CheckOut
+            </button>
+            <button
+              onClick={clearCart}
+              className="flex mr-1 mt-9  text-white bg-sky-500 border-0 py-3 px-2 focus:outline-none hover:bg-sky-300 rounded hover:text-sky-800 hover:font-bold text-sm"
+            >
+              Clear Cart
+            </button>
+          </div>
         </div>
       </div>
     </>
