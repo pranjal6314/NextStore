@@ -23,5 +23,5 @@ const OrderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+mongoose.models = {};
 export default monooges.model("Order", OrderSchema);

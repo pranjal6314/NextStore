@@ -4,9 +4,7 @@ const mongoose = require("mongoose");
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/test");
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+  await mongoose.connect(process.env.MONGO_URI);
 }
 const ProductSchema = new mongoose.Schema(
   {
@@ -21,5 +19,5 @@ const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-export default monooges.model("Product", ProductSchema);
+mongoose.models = {};
+export default mongoose.model("Product", ProductSchema);
