@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Slug = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   const [pin, setPin] = useState();
   const [service, setService] = useState();
@@ -9,8 +10,28 @@ const Slug = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
     let pins = await fetch("http://localhost:3000/api/pincode");
     let pinJson = await pins.json();
     if (pinJson.includes(parseInt(pin))) {
+      toast.success("🦄 Wow your pincode is serviceable!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setService(true);
     } else {
+      toast.warn("Opps! Your pincode is not serviceable", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setService(false);
     }
   };
@@ -23,6 +44,19 @@ const Slug = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
+        <ToastContainer
+          position="top-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <div className="container px-5 py-16 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
