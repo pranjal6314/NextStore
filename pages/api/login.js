@@ -1,13 +1,17 @@
 import User from "../../models/User";
 import connectDb from "../../middleware/monooges";
-
+var CryptoJS = require("crypto-js");
 const handler = async (req, res) => {
   if (req.method === "POST") {
     let user = await User.findOne({ email: req.body.email });
+    const bytes = CryptoJS.AES.decrypt(user.password, "sec1234");
+    var decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+    // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
     if (user) {
       if (
         req.body.email === user.email &&
-        req.body.password === user.password
+        decryptedData === req.body.password
       ) {
         res
           .status(200)
