@@ -1,6 +1,8 @@
 import User from "../../models/User";
 import connectDb from "../../middleware/monooges";
 var CryptoJS = require("crypto-js");
+var jwt = require("jsonwebtoken");
+
 const handler = async (req, res) => {
   if (req.method === "POST") {
     let user = await User.findOne({ email: req.body.email });
@@ -13,9 +15,10 @@ const handler = async (req, res) => {
         req.body.email === user.email &&
         decryptedData === req.body.password
       ) {
-        res
-          .status(200)
-          .json({ success: true, email: user.email, name: user.name });
+        var token = jwt.sign({ email: user.email, name: user.name }, "ourkey", {
+          expiresIn: "1h",
+        });
+        res.status(200).json({ token: token, success: true });
       } else {
         res.status(200).json({ success: false, error: "wrong credentials " });
       }
