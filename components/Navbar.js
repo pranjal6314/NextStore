@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,8 +10,21 @@ import {
 import { BsFillBagCheckFill } from "react-icons/bs";
 import { MdAccountCircle } from "react-icons/md";
 
-const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({
+  logout,
+  user,
+  cart,
+  addToCart,
+  removeFromCart,
+  clearCart,
+  subTotal,
+}) => {
   const ref = useRef(null);
+
+  const [dropdown, setDropdown] = useState(false);
+  // const toggleDropdown = () => {
+  //   setDropdown(!dropdown);
+  // };
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -56,16 +69,71 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
               <li>About</li>
             </Link>
           </nav>
-          <button className="pr-5 flex cart  ">
-            <Link href={"/login"}>
-              <MdAccountCircle className="text-3xl mx-2 text-sky-500" />
-            </Link>
+          <div className="pr-5 flex cart cursor-pointer ">
+            <a
+              onMouseOver={() => {
+                setDropdown(true);
+              }}
+              onMouseLeave={() => {
+                setDropdown(false);
+              }}
+            >
+              {dropdown && (
+                <div
+                  onMouseOver={() => {
+                    setDropdown(true);
+                  }}
+                  onMouseLeave={() => {
+                    setDropdown(false);
+                  }}
+                  className="absolute right-24 bg-sky-300  top-11 rounded-md px-5 w-44"
+                >
+                  <ul>
+                    <Link href="/account">
+                      {" "}
+                      <a href="">
+                        {" "}
+                        <li className="py-1 hover:text-sky-400 text-sm">
+                          My Account
+                        </li>
+                      </a>
+                    </Link>
+
+                    <Link href="/order">
+                      {" "}
+                      <a>
+                        {" "}
+                        <li className="py-1 hover:text-sky-400 text-sm">
+                          Order
+                        </li>
+                      </a>
+                    </Link>
+                    <a onClick={logout}>
+                      {" "}
+                      <li className="py-1 hover:text-sky-400 text-sm">
+                        LogOut
+                      </li>
+                    </a>
+                  </ul>
+                </div>
+              )}
+              {user.value && (
+                <MdAccountCircle className="text-3xl mx-2 text-sky-500" />
+              )}
+            </a>
+            {!user.value && (
+              <Link href={"/login"}>
+                <button className=" bg-sky-400 px-2 py-1 rounded-md text-sm text-white mx-2">
+                  login
+                </button>
+              </Link>
+            )}
             <AiOutlineShoppingCart
               onClick={toggleCart}
               className="text-sky-500 text-3xl"
             />
-          </button>
-          <button className="inline-flex items-center bg-sky-100 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-200 rounded text-base mt-4 md:mt-0">
+          </div>
+          {/* <button className="inline-flex items-center bg-sky-100 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-200 rounded text-base mt-4 md:mt-0">
             Login
             <svg
               fill="none"
@@ -78,7 +146,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             >
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
-          </button>
+          </button> */}
         </div>
         <div
           ref={ref}
