@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { set } from "mongoose";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
@@ -10,6 +10,12 @@ const login = () => {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
+
   const handleChange = (e) => {
     if (e.target.name === "email") setEmail(e.target.value);
     else setPassword(e.target.value);
@@ -17,7 +23,7 @@ const login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const frombody = { email, password };
-    let res = await fetch("http://localhost:3000/api/login", {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

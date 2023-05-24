@@ -1,12 +1,20 @@
 import { set } from "mongoose";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
+
   const handleChange = (e) => {
     if (e.target.name === "name") setName(e.target.value);
     else if (e.target.name === "email") setEmail(e.target.value);
@@ -15,7 +23,7 @@ const signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const frombody = { name, email, password };
-    let res = await fetch("http://localhost:3000/api/signup", {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

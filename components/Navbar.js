@@ -99,7 +99,7 @@ const Navbar = ({
                       </a>
                     </Link>
 
-                    <Link href="/order">
+                    <Link href="/orders">
                       {" "}
                       <a>
                         {" "}

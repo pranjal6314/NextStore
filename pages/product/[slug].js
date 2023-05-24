@@ -1,3 +1,5 @@
+import Order from "@/models/Order";
+import mongoose from "mongoose";
 import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
@@ -7,7 +9,7 @@ const Slug = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   const [pin, setPin] = useState();
   const [service, setService] = useState();
   const checkServiceAbility = async () => {
-    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
     if (pinJson.includes(parseInt(pin))) {
       toast.success("🦄 Wow your pincode is serviceable!", {
