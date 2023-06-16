@@ -88,16 +88,18 @@ export default function App({ Component, pageProps }) {
         waitingTime={400}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Navbar
-        logout={logout}
-        key={key}
-        user={user}
-        cart={cart}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-        clearCart={clearCart}
-        subTotal={subTotal}
-      />
+      {key && (
+        <Navbar
+          logout={logout}
+          key={key}
+          user={user}
+          cart={cart}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          clearCart={clearCart}
+          subTotal={subTotal}
+        />
+      )}
       <Component
         cart={cart}
         addToCart={addToCart}

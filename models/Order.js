@@ -10,7 +10,8 @@ async function main() {
 }
 const OrderSchema = new mongoose.Schema(
   {
-    userId: { type: String, required: true },
+    email: { type: String, required: true },
+    orderId: { type: String, required: true },
     products: [
       {
         productId: { type: String },
